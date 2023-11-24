@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reservafacil/routes.dart';
+import 'package:reserva_facil/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "asdasd",
+      title: "reservafacil",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
       ),
-      initialRoute: '/menu/1/',
+      initialRoute: '/misordenes',
       routes: routes,
     );
   }
