@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:reservafacil/app/entities/menu.dart';
 
 class MySelectedMenu extends StatefulWidget {
-  const MySelectedMenu();
+  final int menuId;
+
+  const MySelectedMenu({required this.menuId});
 
   @override
   _MySelectedMenu createState() => _MySelectedMenu();
 }
 
 class _MySelectedMenu extends State<MySelectedMenu> {
+  late Menu menu;
+
+  @override
+  void initState() {
+    super.initState();
+    print('este es el id : $widget.menuId');
+    menu = getMenuInfo(widget.menuId);
+  }
+
+  Menu getMenuInfo(int menuId) {
+    return menus.firstWhere((menu) => menu.id == menuId);
+  }
+
   bool isItemSelected = false;
   bool juiceSelected = false;
   bool waterSelected = false;
@@ -21,7 +37,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
           children: [
             SizedBox(height: 30),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 30),
+              margin: EdgeInsets.symmetric(horizontal: 20),
               width: double.infinity,
               child: Column(
                 children: [
@@ -55,13 +71,32 @@ class _MySelectedMenu extends State<MySelectedMenu> {
   }
 
   Widget buildHeaderImage() {
-    return Container(
-      width: double.infinity,
-      height: 195,
-      child: Image.network(
-        'https://danosseasoning.com/wp-content/uploads/2022/03/Beef-Tacos.jpg',
-        fit: BoxFit.cover,
-      ),
+    return Stack(
+      children: [
+        Container(
+          width: double.infinity,
+          height: 195,
+          child: Image.network(
+            menu.imageUrl,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Positioned(
+          top: 16, // Ajusta la posición vertical según sea necesario
+          left: 16, // Ajusta la posición horizontal según sea necesario
+          child: InkWell(
+            onTap: () {
+              print('Tapped back arrow');
+              Navigator.pushNamed(context, '/');
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+              size: 32,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -103,7 +138,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 145, 0),
+                  margin: EdgeInsets.fromLTRB(0, 0, 165, 0),
                   child: Text(
                     '3.380',
                     style: TextStyle(
@@ -126,8 +161,9 @@ class _MySelectedMenu extends State<MySelectedMenu> {
 
   Widget buildDescription() {
     return Container(
+      width: double.infinity,
       child: Text(
-        'Contiene blab Contiene blaasdasdasdsssb Contiene blab Contiene blab Contiene blab Contiene blab Contiene blab Contiene blab Contiene blab Contiene blab ',
+        'Contiene blab Contiene blaasdasdasssssdsssb Contiene blab Contiene blab Contiene blab Contiene blab Contiene blab Contiene blab Contiene blab Contiene blab ',
         style: TextStyle(
           fontFamily: 'Poppins',
           fontSize: 16,
@@ -269,7 +305,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.only(right: 175),
+            margin: EdgeInsets.only(right: 195),
             height: 40,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,

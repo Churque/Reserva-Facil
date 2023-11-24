@@ -20,6 +20,9 @@ class _MyMenusPage extends State<MyMenusPage> {
           width: double.infinity,
           child: Column(
             children: [
+              SizedBox(
+                height: 30,
+              ),
               TopAppBar(),
               buildAllMenus(),
             ],
@@ -57,7 +60,7 @@ class _MyMenusPage extends State<MyMenusPage> {
       child: Row(
         children: [
           SizedBox(
-            height: 100,
+            height: 70,
           ),
           Spacer(),
           Spacer(),
@@ -88,7 +91,7 @@ class _MyMenusPage extends State<MyMenusPage> {
             height: 25,
           ),
           ...menus.map((menu) => buildMenu(
-              menu.name, menu.description, menu.price, menu.imageUrl)),
+              menu.name, menu.description, menu.price, menu.imageUrl, menu.id)),
         ],
       ),
     );
@@ -106,9 +109,13 @@ class _MyMenusPage extends State<MyMenusPage> {
     );
   }
 
-  Widget buildMenu(
-      String menuName, String description, double price, String imageUrl) {
+  Widget buildMenu(String menuName, String description, double price,
+      String imageUrl, int id) {
     return GestureDetector(
+      onTap: () {
+        print('Menu clickeado: $menuName   id: $id');
+        Navigator.pushNamed(context, '/menu/$id');
+      },
       child: Container(
         margin: EdgeInsets.only(bottom: 25),
         height: 255,
