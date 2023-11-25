@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:reservafacil/app/page/menusPage.dart';
-import 'package:reservafacil/app/page/selectedMenuPage.dart';
-import 'package:reservafacil/routes.dart';
+import 'package:reserva_facil/app/page/menusPage.dart';
+import 'package:reserva_facil/app/page/selectedMenuPage.dart';
+import 'package:reserva_facil/routes.dart';
 
 void main() {
   runApp(const MyApp());

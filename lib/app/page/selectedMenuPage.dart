@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:reservafacil/app/entities/menu.dart';
+import 'package:reserva_facil/app/entities/menu.dart';
 
 class MySelectedMenu extends StatefulWidget {
   final int menuId;
-
   const MySelectedMenu({required this.menuId});
 
   @override
@@ -11,12 +10,11 @@ class MySelectedMenu extends StatefulWidget {
 }
 
 class _MySelectedMenu extends State<MySelectedMenu> {
-  late Menu menu;
+  Menu? menu;
 
   @override
   void initState() {
     super.initState();
-    print('este es el id : $widget.menuId');
     menu = getMenuInfo(widget.menuId);
   }
 
@@ -31,6 +29,10 @@ class _MySelectedMenu extends State<MySelectedMenu> {
 
   @override
   Widget build(BuildContext context) {
+    if (menu == null) {
+      return CircularProgressIndicator(); // O cualquier otro widget o mensaje
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -48,7 +50,6 @@ class _MySelectedMenu extends State<MySelectedMenu> {
                     child: Column(
                       children: [
                         buildMenuHeader(),
-                        SizedBox(height: 30),
                         buildDescription(),
                       ],
                     ),
@@ -77,7 +78,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
           width: double.infinity,
           height: 195,
           child: Image.network(
-            menu.imageUrl,
+            menu!.imageUrl,
             fit: BoxFit.cover,
           ),
         ),
@@ -107,7 +108,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Menu Ejecutivo',
+            menu!.name,
             style: TextStyle(
               fontFamily: 'Poppins',
               fontSize: 28,
@@ -140,7 +141,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 0, 165, 0),
                   child: Text(
-                    '3.380',
+                    menu!.price.toStringAsFixed(0),
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       fontSize: 24,
@@ -162,15 +163,26 @@ class _MySelectedMenu extends State<MySelectedMenu> {
   Widget buildDescription() {
     return Container(
       width: double.infinity,
-      child: Text(
-        'Contiene blab Contiene blaasdasdasssssdsssb Contiene blab Contiene blab Contiene blab Contiene blab Contiene blab Contiene blab Contiene blab Contiene blab ',
-        style: TextStyle(
-          fontFamily: 'Poppins',
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          height: 1.5,
-          color: Color(0xff858992),
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: menu!.ingredients.length,
+            itemBuilder: (context, index) {
+              return Text(
+                menu!.ingredients[index],
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  height: 1.5,
+                  color: Color(0xff858992),
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

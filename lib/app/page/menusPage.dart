@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reservafacil/app/entities/menu.dart';
+import 'package:reserva_facil/app/entities/menu.dart';
 
 class MyMenusPage extends StatefulWidget {
   const MyMenusPage();

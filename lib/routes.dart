@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:reservafacil/app/page/menusPage.dart';
-import 'package:reservafacil/app/page/selectedMenuPage.dart';
+import 'package:reserva_facil/app/page/home_page_widget.dart';
+import 'package:reserva_facil/app/page/menusPage.dart';
+import 'package:reserva_facil/app/page/misordenes_widget.dart';
+import 'package:reserva_facil/app/page/selectedMenuPage.dart';
 
 final Map<String, WidgetBuilder> routes = {
   '/': (BuildContext context) => const MyMenusPage(),
@@ -14,4 +16,5 @@ final Map<String, WidgetBuilder> routes = {
     print('ID del menú: $menuId');
     return MySelectedMenu(menuId: menuId);
   },
+  //'/misordenes': (BuildContext context) => const MisordenesWidget()
 };
