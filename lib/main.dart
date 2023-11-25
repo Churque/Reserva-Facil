@@ -15,16 +15,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: "asdasd",
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(255, 0, 55, 110)),
         ),
         initialRoute: '/',
         routes: routes,
         onGenerateRoute: (settings) {
-          if (settings.name == '/menu') {
-            return MaterialPageRoute(
-              builder: (context) => MyMenusPage(),
-            );
-          } else if (settings.name!.startsWith('/menu/')) {
+          if (settings.name!.startsWith('/menu/')) {
             final List<String> pathComponents = settings.name!.split('/');
             if (pathComponents.length == 3) {
               final int menuId = int.tryParse(pathComponents[2]) ?? -1;

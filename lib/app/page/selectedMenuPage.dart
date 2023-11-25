@@ -11,6 +11,8 @@ class MySelectedMenu extends StatefulWidget {
 
 class _MySelectedMenu extends State<MySelectedMenu> {
   Menu? menu;
+  String? datosParaQr;
+  String? seleccionable;
 
   @override
   void initState() {
@@ -22,6 +24,16 @@ class _MySelectedMenu extends State<MySelectedMenu> {
     return menus.firstWhere((menu) => menu.id == menuId);
   }
 
+  obtenerDatosParaQR() {
+    return datosParaQr = menu!.name +
+        ' ' +
+        menu!.price.toStringAsFixed(0) +
+        ' ' +
+        menu!.ingredients.toString() +
+        ' ' +
+        seleccionable!;
+  }
+
   bool isItemSelected = false;
   bool juiceSelected = false;
   bool waterSelected = false;
@@ -30,7 +42,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
   @override
   Widget build(BuildContext context) {
     if (menu == null) {
-      return CircularProgressIndicator(); // O cualquier otro widget o mensaje
+      return CircularProgressIndicator();
     }
 
     return Scaffold(
@@ -43,6 +55,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
               width: double.infinity,
               child: Column(
                 children: [
+                  SizedBox(height: 30),
                   buildHeaderImage(),
                   SizedBox(height: 20),
                   Container(
@@ -83,11 +96,10 @@ class _MySelectedMenu extends State<MySelectedMenu> {
           ),
         ),
         Positioned(
-          top: 16, // Ajusta la posición vertical según sea necesario
-          left: 16, // Ajusta la posición horizontal según sea necesario
+          top: 16,
+          left: 16,
           child: InkWell(
             onTap: () {
-              print('Tapped back arrow');
               Navigator.pushNamed(context, '/');
             },
             child: Icon(
@@ -283,6 +295,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
                 if (waterSelected) {
                   waterSelected = false;
                 }
+                seleccionable = 'Jugo';
               });
             },
           ),
@@ -299,6 +312,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
                   juiceSelected = false;
                 }
               });
+              seleccionable = 'Agua';
             },
           ),
         ],
@@ -385,28 +399,37 @@ class _MySelectedMenu extends State<MySelectedMenu> {
   Widget buildComprarButton() {
     return Container(
       margin: EdgeInsets.fromLTRB(72.5, 0, 72.5, 0),
-      width: double.infinity,
-      height: 60,
-      decoration: BoxDecoration(
-        color: Color(0xff00376e),
-        borderRadius: BorderRadius.circular(100),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0x3f000000),
-            offset: Offset(0, 4),
-            blurRadius: 2,
+      child: InkWell(
+        onTap: () {
+          String qrData = obtenerDatosParaQR();
+          print('$qrData');
+          Navigator.pushNamed(context, '/codigoqr', arguments: qrData);
+        },
+        child: Container(
+          width: double.infinity,
+          height: 60,
+          decoration: BoxDecoration(
+            color: Color(0xff00376e),
+            borderRadius: BorderRadius.circular(100),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0x3f000000),
+                offset: Offset(0, 4),
+                blurRadius: 2,
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Center(
-        child: Text(
-          'Comprar',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            height: 1.5,
-            color: Color(0xffffffff),
+          child: Center(
+            child: Text(
+              'Comprar',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                height: 1.5,
+                color: Color(0xffffffff),
+              ),
+            ),
           ),
         ),
       ),

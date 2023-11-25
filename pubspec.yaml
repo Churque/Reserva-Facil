@@ -9,6 +9,8 @@ dependencies:
 
   flutter:
     sdk: flutter
+  flutter_qr_bar_scanner: ^3.0.2
+  qr_flutter: ^4.1.0
   auto_size_text: 3.0.0
   cached_network_image: 3.2.1
   flutter_animate: 4.1.1+1

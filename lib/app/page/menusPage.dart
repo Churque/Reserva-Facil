@@ -21,7 +21,7 @@ class _MyMenusPage extends State<MyMenusPage> {
           child: Column(
             children: [
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               TopAppBar(),
               buildAllMenus(),
@@ -49,6 +49,9 @@ class _MyMenusPage extends State<MyMenusPage> {
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
+            if (index == 1) {
+              Navigator.pushNamed(context, '/scanner');
+            }
           });
         },
       ),
@@ -171,7 +174,7 @@ class _MyMenusPage extends State<MyMenusPage> {
                     ),
                     Positioned(
                       left: 11,
-                      top: 13,
+                      top: 12,
                       child: Text(
                         'CLP',
                         style: TextStyle(
@@ -185,7 +188,7 @@ class _MyMenusPage extends State<MyMenusPage> {
                     ),
                     Positioned(
                       left: 34,
-                      top: 0,
+                      top: -2,
                       child: SizedBox(
                         width: 61,
                         height: 36,
