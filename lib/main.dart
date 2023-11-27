@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reserva_facil/app/page/homepage.dart';
 import 'package:reserva_facil/app/page/menusPage.dart';
 import 'package:reserva_facil/app/page/selectedMenuPage.dart';
 import 'package:reserva_facil/routes.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(
               seedColor: const Color.fromARGB(255, 0, 55, 110)),
         ),
+        //home: MainScreen()
         initialRoute: '/',
         routes: routes,
         onGenerateRoute: (settings) {

@@ -63,3 +63,5 @@ final List<Menu> menus = [
     ingredients: ['Ensalada', 'Boloñesa de ave con spaghetti', 'Postre', 'Pan'],
   ),
 ];
+
+List<String> QRDataMenu = [];

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reserva_facil/app/entities/compra.dart';
 import 'package:reserva_facil/app/entities/menu.dart';
 
 class MySelectedMenu extends StatefulWidget {
@@ -12,12 +13,16 @@ class MySelectedMenu extends StatefulWidget {
 class _MySelectedMenu extends State<MySelectedMenu> {
   Menu? menu;
   String? datosParaQr;
-  String? seleccionable;
+
+  //jugo esta como default
+  String? seleccionable = 'jugo';
 
   @override
   void initState() {
     super.initState();
     menu = getMenuInfo(widget.menuId);
+    // jugo seleccionado como default
+    juiceSelected = true;
   }
 
   Menu getMenuInfo(int menuId) {
@@ -31,7 +36,9 @@ class _MySelectedMenu extends State<MySelectedMenu> {
         ' ' +
         menu!.ingredients.toString() +
         ' ' +
-        seleccionable!;
+        seleccionable! +
+        ' ' +
+        itemCount.toStringAsFixed(0);
   }
 
   bool isItemSelected = false;
@@ -46,23 +53,29 @@ class _MySelectedMenu extends State<MySelectedMenu> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Reserva Facil',
+        ),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 30),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20),
               width: double.infinity,
               child: Column(
                 children: [
-                  SizedBox(height: 30),
+                  SizedBox(height: 10),
                   buildHeaderImage(),
-                  SizedBox(height: 20),
+                  SizedBox(height: 15),
                   Container(
                     width: double.infinity,
                     child: Column(
                       children: [
                         buildMenuHeader(),
+                        SizedBox(height: 15),
                         buildDescription(),
                       ],
                     ),
@@ -95,6 +108,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
             fit: BoxFit.cover,
           ),
         ),
+        /*
         Positioned(
           top: 16,
           left: 16,
@@ -109,6 +123,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
             ),
           ),
         ),
+        */
       ],
     );
   }
@@ -403,6 +418,10 @@ class _MySelectedMenu extends State<MySelectedMenu> {
         onTap: () {
           String qrData = obtenerDatosParaQR();
           print('$qrData');
+          QRDataMenu.add(qrData);
+          List<String> qrParts = qrData.split(' ');
+          Compra compra = Compra(qrData: qrData, menu: menu!);
+          historialCompras.add(compra);
           Navigator.pushNamed(context, '/codigoqr', arguments: qrData);
         },
         child: Container(

@@ -3,6 +3,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 class MyQRPage extends StatefulWidget {
   final String qrData;
+
   const MyQRPage({required this.qrData});
   //const MyQRPage();
   @override
@@ -22,7 +23,10 @@ class _MyQRPage extends State<MyQRPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Código QR'),
+        title: Text(
+          'Codigo QR',
+        ),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(

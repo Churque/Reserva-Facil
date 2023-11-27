@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reserva_facil/app/entities/menu.dart';
+import 'package:reserva_facil/app/widgets/BottomNavBar.dart';
 
 class MyMenusPage extends StatefulWidget {
   const MyMenusPage();
@@ -14,6 +15,12 @@ class _MyMenusPage extends State<MyMenusPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Reserva Facil',
+        ),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 15),
@@ -23,64 +30,12 @@ class _MyMenusPage extends State<MyMenusPage> {
               SizedBox(
                 height: 20,
               ),
-              TopAppBar(),
               buildAllMenus(),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.restaurant_menu),
-            label: 'Menús',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'Historial',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
-          ),
-        ],
-        selectedItemColor: Color(0xff00376e),
-        currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-            if (index == 1) {
-              Navigator.pushNamed(context, '/scanner');
-            }
-          });
-        },
-      ),
-    );
-  }
-
-  Widget TopAppBar() {
-    return Container(
-      child: Row(
-        children: [
-          SizedBox(
-            height: 70,
-          ),
-          Spacer(),
-          Spacer(),
-          Text(
-            'Reserva Facil',
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              height: 1.5,
-              color: Color(0xff00376e),
-            ),
-          ),
-          Spacer(),
-          buildUserProfile(),
-        ],
-      ),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 
@@ -97,6 +52,39 @@ class _MyMenusPage extends State<MyMenusPage> {
               menu.name, menu.description, menu.price, menu.imageUrl, menu.id)),
         ],
       ),
+    );
+  }
+
+  Widget BottomNavBar() {
+    return BottomNavigationBar(
+      items: [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.restaurant_menu),
+          label: 'Menús',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.history),
+          label: 'Historial',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Scanner',
+        ),
+      ],
+      selectedItemColor: Color(0xff00376e),
+      currentIndex: _selectedIndex,
+      onTap: (index) {
+        setState(() {
+          _selectedIndex = index;
+          if (index == 0) {
+            Navigator.pushNamed(context, '/');
+          } else if (index == 1) {
+            Navigator.pushNamed(context, '/historial');
+          } else if (index == 2) {
+            Navigator.pushNamed(context, '/scanner');
+          }
+        });
+      },
     );
   }
 
@@ -237,19 +225,6 @@ class _MyMenusPage extends State<MyMenusPage> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildUserProfile() {
-    return Container(
-      width: 52,
-      height: 50.24,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Image.network(
-          'https://cdn-icons-png.flaticon.com/512/1674/1674400.png',
         ),
       ),
     );
