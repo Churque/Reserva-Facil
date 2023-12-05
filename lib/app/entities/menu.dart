@@ -1,66 +1,91 @@
 class Menu {
-  final String name;
-  final String description;
-  final double price;
-  final String imageUrl;
-  final List<String> ingredients;
+  final String nombre;
+  final String descripcion;
+  final double precio;
+  final String imagenUrl;
+  final List<String> ingredientes;
   final int id;
 
   Menu({
-    required this.name,
-    required this.description,
-    required this.price,
-    required this.imageUrl,
+    required this.nombre,
+    required this.descripcion,
+    required this.precio,
+    required this.imagenUrl,
     required this.id,
-    required this.ingredients,
+    required this.ingredientes,
   });
 }
 
 final List<Menu> menus = [
   Menu(
     id: 1,
-    name: 'Menú 1',
-    description: 'Descripcion del menu 1',
-    price: 3499,
-    imageUrl:
+    nombre: 'Menú 1',
+    descripcion: 'Descripcion del menu 1',
+    precio: 3499,
+    imagenUrl:
         'https://danosseasoning.com/wp-content/uploads/2022/03/Beef-Tacos.jpg',
-    ingredients: ['Ensalada', 'Boloñesa de ave con spaghetti', 'Postre', 'Pan'],
+    ingredientes: [
+      'Ensalada',
+      'Boloñesa de ave con spaghetti',
+      'Postre',
+      'Pan'
+    ],
   ),
   Menu(
     id: 2,
-    name: 'Menú 2',
-    description: 'Descripción del Menú 2',
-    price: 2599,
-    imageUrl:
+    nombre: 'Menú 2',
+    descripcion: 'Descripción del Menú 2',
+    precio: 2599,
+    imagenUrl:
         'https://danosseasoning.com/wp-content/uploads/2022/03/Beef-Tacos.jpg',
-    ingredients: ['Ensalada', 'Boloñesa de ave con spaghetti', 'Postre', 'Pan'],
+    ingredientes: [
+      'Ensalada',
+      'Boloñesa de ave con spaghetti',
+      'Postre',
+      'Pan'
+    ],
   ),
   Menu(
     id: 3,
-    name: 'Menú 3',
-    description: 'Descripción del Menú 3',
-    price: 3499,
-    imageUrl:
+    nombre: 'Menú 3',
+    descripcion: 'Descripción del Menú 3',
+    precio: 3499,
+    imagenUrl:
         'https://danosseasoning.com/wp-content/uploads/2022/03/Beef-Tacos.jpg',
-    ingredients: ['Ensalada', 'Boloñesa de ave con spaghetti', 'Postre', 'Pan'],
+    ingredientes: [
+      'Ensalada',
+      'Boloñesa de ave con spaghetti',
+      'Postre',
+      'Pan'
+    ],
   ),
   Menu(
     id: 4,
-    name: 'Menú 4',
-    description: 'Descripción del Menú 4',
-    price: 3499,
-    imageUrl:
+    nombre: 'Menú 4',
+    descripcion: 'Descripción del Menú 4',
+    precio: 3499,
+    imagenUrl:
         'https://danosseasoning.com/wp-content/uploads/2022/03/Beef-Tacos.jpg',
-    ingredients: ['Ensalada', 'Boloñesa de ave con spaghetti', 'Postre', 'Pan'],
+    ingredientes: [
+      'Ensalada',
+      'Boloñesa de ave con spaghetti',
+      'Postre',
+      'Pan'
+    ],
   ),
   Menu(
     id: 5,
-    name: 'Menú 5',
-    description: 'Descripción del Menú 5',
-    price: 3499,
-    imageUrl:
+    nombre: 'Menú 5',
+    descripcion: 'Descripción del Menú 5',
+    precio: 3499,
+    imagenUrl:
         'https://danosseasoning.com/wp-content/uploads/2022/03/Beef-Tacos.jpg',
-    ingredients: ['Ensalada', 'Boloñesa de ave con spaghetti', 'Postre', 'Pan'],
+    ingredientes: [
+      'Ensalada',
+      'Boloñesa de ave con spaghetti',
+      'Postre',
+      'Pan'
+    ],
   ),
 ];
 

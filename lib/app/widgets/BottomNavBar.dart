@@ -22,7 +22,7 @@ class BottomNavBar extends StatelessWidget {
           label: 'Historial',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.camera),
           label: 'Perfil',
         ),
       ],

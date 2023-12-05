@@ -13,6 +13,7 @@ class MySelectedMenu extends StatefulWidget {
 class _MySelectedMenu extends State<MySelectedMenu> {
   Menu? menu;
   String? datosParaQr;
+  int? menuId;
 
   //jugo esta como default
   String? seleccionable = 'jugo';
@@ -21,6 +22,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
   void initState() {
     super.initState();
     menu = getMenuInfo(widget.menuId);
+
     // jugo seleccionado como default
     juiceSelected = true;
   }
@@ -30,11 +32,11 @@ class _MySelectedMenu extends State<MySelectedMenu> {
   }
 
   obtenerDatosParaQR() {
-    return datosParaQr = menu!.name +
+    return datosParaQr = menu!.nombre +
         ' ' +
-        menu!.price.toStringAsFixed(0) +
+        menu!.precio.toStringAsFixed(0) +
         ' ' +
-        menu!.ingredients.toString() +
+        menu!.ingredientes.toString() +
         ' ' +
         seleccionable! +
         ' ' +
@@ -68,26 +70,26 @@ class _MySelectedMenu extends State<MySelectedMenu> {
               child: Column(
                 children: [
                   SizedBox(height: 10),
-                  buildHeaderImage(),
+                  buildImagenTop(),
                   SizedBox(height: 15),
                   Container(
                     width: double.infinity,
                     child: Column(
                       children: [
-                        buildMenuHeader(),
+                        buildMenuInfo(),
                         SizedBox(height: 15),
-                        buildDescription(),
+                        buildDescripcion(),
                       ],
                     ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  buildChooseWaterOrJuice(),
+                  buildContainerElegirAguaOJugo(),
                   SizedBox(
                     height: 30,
                   ),
-                  buildComprarButton(),
+                  buildComprarBoton(),
                 ],
               ),
             ),
@@ -97,14 +99,14 @@ class _MySelectedMenu extends State<MySelectedMenu> {
     );
   }
 
-  Widget buildHeaderImage() {
+  Widget buildImagenTop() {
     return Stack(
       children: [
         Container(
           width: double.infinity,
           height: 195,
           child: Image.network(
-            menu!.imageUrl,
+            menu!.imagenUrl,
             fit: BoxFit.cover,
           ),
         ),
@@ -128,14 +130,14 @@ class _MySelectedMenu extends State<MySelectedMenu> {
     );
   }
 
-  Widget buildMenuHeader() {
+  Widget buildMenuInfo() {
     return Container(
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            menu!.name,
+            menu!.nombre,
             style: TextStyle(
               fontFamily: 'Poppins',
               fontSize: 28,
@@ -168,7 +170,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 0, 165, 0),
                   child: Text(
-                    menu!.price.toStringAsFixed(0),
+                    menu!.precio.toStringAsFixed(0),
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       fontSize: 24,
@@ -178,7 +180,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
                     ),
                   ),
                 ),
-                buildCounterRow(),
+                buildContador(),
               ],
             ),
           ),
@@ -187,7 +189,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
     );
   }
 
-  Widget buildDescription() {
+  Widget buildDescripcion() {
     return Container(
       width: double.infinity,
       child: Column(
@@ -195,10 +197,10 @@ class _MySelectedMenu extends State<MySelectedMenu> {
         children: [
           ListView.builder(
             shrinkWrap: true,
-            itemCount: menu!.ingredients.length,
+            itemCount: menu!.ingredientes.length,
             itemBuilder: (context, index) {
               return Text(
-                menu!.ingredients[index],
+                menu!.ingredientes[index],
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: 16,
@@ -214,7 +216,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
     );
   }
 
-  Widget buildCounterRow() {
+  Widget buildContador() {
     return Container(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -283,7 +285,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
     );
   }
 
-  Widget buildChooseWaterOrJuice() {
+  Widget buildContainerElegirAguaOJugo() {
     return Container(
       width: double.infinity,
       child: Column(
@@ -411,7 +413,7 @@ class _MySelectedMenu extends State<MySelectedMenu> {
     );
   }
 
-  Widget buildComprarButton() {
+  Widget buildComprarBoton() {
     return Container(
       margin: EdgeInsets.fromLTRB(72.5, 0, 72.5, 0),
       child: InkWell(
@@ -419,7 +421,6 @@ class _MySelectedMenu extends State<MySelectedMenu> {
           String qrData = obtenerDatosParaQR();
           print('$qrData');
           QRDataMenu.add(qrData);
-          List<String> qrParts = qrData.split(' ');
           Compra compra = Compra(qrData: qrData, menu: menu!);
           historialCompras.add(compra);
           Navigator.pushNamed(context, '/codigoqr', arguments: qrData);

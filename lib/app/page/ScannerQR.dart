@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
-import 'package:reserva_facil/app/entities/compra.dart';
 
 class ScannerQRPage extends StatefulWidget {
   const ScannerQRPage();
@@ -16,12 +15,12 @@ class _ScannerQRPage extends State<ScannerQRPage> {
   late String ingredientes = '';
   late String bebida = '';
   late String cantidad = '';
-  bool camState = false;
-  int _selectedIndex = 2;
+  bool camaraHabilitada = false;
+  int indexNavigation = 2;
 
   qrCallback(String? code) {
     setState(() {
-      camState = false;
+      camaraHabilitada = false;
       _qrInfo = code;
 
       List<String> qrParts = _qrInfo!.split(' ');
@@ -40,7 +39,7 @@ class _ScannerQRPage extends State<ScannerQRPage> {
   void initState() {
     super.initState();
     setState(() {
-      camState = true;
+      camaraHabilitada = true;
     });
   }
 
@@ -52,19 +51,19 @@ class _ScannerQRPage extends State<ScannerQRPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          if (camState == true) {
+          if (camaraHabilitada == true) {
             setState(() {
-              camState = false;
+              camaraHabilitada = false;
             });
           } else {
             setState(() {
-              camState = true;
+              camaraHabilitada = true;
             });
           }
         },
         child: Icon(Icons.camera),
       ),
-      body: camState
+      body: camaraHabilitada
           ? Container(
               child: SizedBox(
                 height: 1000,
@@ -118,15 +117,15 @@ class _ScannerQRPage extends State<ScannerQRPage> {
           label: 'Historial',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.camera_alt),
           label: 'Scanner',
         ),
       ],
       selectedItemColor: Color(0xff00376e),
-      currentIndex: _selectedIndex,
+      currentIndex: indexNavigation,
       onTap: (index) {
         setState(() {
-          _selectedIndex = index;
+          indexNavigation = index;
           if (index == 0) {
             Navigator.pushNamed(context, '/');
           } else if (index == 1) {

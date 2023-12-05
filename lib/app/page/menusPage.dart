@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:reserva_facil/app/entities/menu.dart';
-import 'package:reserva_facil/app/widgets/BottomNavBar.dart';
 
 class MyMenusPage extends StatefulWidget {
   const MyMenusPage();
@@ -10,7 +9,7 @@ class MyMenusPage extends StatefulWidget {
 }
 
 class _MyMenusPage extends State<MyMenusPage> {
-  int _selectedIndex = 0;
+  int indexNavigation = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class _MyMenusPage extends State<MyMenusPage> {
               SizedBox(
                 height: 20,
               ),
-              buildAllMenus(),
+              BuildContainerMenus(),
             ],
           ),
         ),
@@ -39,7 +38,7 @@ class _MyMenusPage extends State<MyMenusPage> {
     );
   }
 
-  Widget buildAllMenus() {
+  Widget BuildContainerMenus() {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,8 +47,8 @@ class _MyMenusPage extends State<MyMenusPage> {
           SizedBox(
             height: 25,
           ),
-          ...menus.map((menu) => buildMenu(
-              menu.name, menu.description, menu.price, menu.imageUrl, menu.id)),
+          ...menus.map((menu) => buildMenu(menu.nombre, menu.descripcion,
+              menu.precio, menu.imagenUrl, menu.id)),
         ],
       ),
     );
@@ -67,15 +66,15 @@ class _MyMenusPage extends State<MyMenusPage> {
           label: 'Historial',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.camera_alt),
           label: 'Scanner',
         ),
       ],
       selectedItemColor: Color(0xff00376e),
-      currentIndex: _selectedIndex,
+      currentIndex: indexNavigation,
       onTap: (index) {
         setState(() {
-          _selectedIndex = index;
+          indexNavigation = index;
           if (index == 0) {
             Navigator.pushNamed(context, '/');
           } else if (index == 1) {
@@ -104,8 +103,12 @@ class _MyMenusPage extends State<MyMenusPage> {
       String imageUrl, int id) {
     return GestureDetector(
       onTap: () {
-        print('Menu clickeado: $menuName   id: $id');
-        Navigator.pushNamed(context, '/menu/$id');
+        // Aquí debes obtener el ID del menú de alguna manera
+        Navigator.pushNamed(
+          context,
+          '/menu',
+          arguments: id,
+        );
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 25),

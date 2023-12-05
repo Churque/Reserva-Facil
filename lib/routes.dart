@@ -12,10 +12,8 @@ final Map<String, WidgetBuilder> routes = {
     return MyQRPage(qrData: qrData);
   },
   '/scanner': (BuildContext context) => const ScannerQRPage(),
-  '/menu/:id/': (context) {
-    final int menuId =
-        int.parse(ModalRoute.of(context)!.settings.name!.split('/').last);
-
+  '/menu': (BuildContext context) {
+    final int menuId = ModalRoute.of(context)!.settings.arguments as int;
     return MySelectedMenu(menuId: menuId);
   },
   '/historial': (BuildContext context) => const MyHistorialPage(),

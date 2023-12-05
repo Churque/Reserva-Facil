@@ -1,4 +1,4 @@
-/*import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:reserva_facil/app/page/ScannerQR.dart';
 import 'package:reserva_facil/app/page/historial_page.dart';
 import 'package:reserva_facil/app/page/menusPage.dart';
@@ -15,13 +15,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-
     final screens = [
       const MyMenusPage(),
-      const MyHistorialPage(
-        compras: [],
-      ),
+      const MyHistorialPage(),
       const ScannerQRPage()
     ];
 
@@ -48,7 +44,7 @@ class _MainScreenState extends State<MainScreen> {
             label: 'Historial',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.camera_alt),
             label: 'Perfil',
           ),
         ],
@@ -57,4 +53,3 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-*/

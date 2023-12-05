@@ -11,7 +11,7 @@ class MyHistorialPage extends StatefulWidget {
 }
 
 class _MyHistorialPage extends State<MyHistorialPage> {
-  int _selectedIndex = 1;
+  int indexNavigation = 1;
   List<Compra> compras = historialCompras;
 
   @override
@@ -95,9 +95,9 @@ class _MyHistorialPage extends State<MyHistorialPage> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BuildImagenMenuHistorial(compra.menu!.imageUrl),
+                  BuildImagenMenuHistorial(compra.menu!.imagenUrl),
                   BuildInfoMenu(compra.menu!),
-                  ButtonEnableOrNot(),
+                  BotonActivoOInactivo(),
                 ],
               ),
               BuildButtonVerCodigoQr(compra.qrData!),
@@ -141,7 +141,7 @@ class _MyHistorialPage extends State<MyHistorialPage> {
             margin: EdgeInsets.only(bottom: 7),
             width: double.infinity,
             child: Text(
-              menu.name,
+              menu.nombre,
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 18,
@@ -170,7 +170,7 @@ class _MyHistorialPage extends State<MyHistorialPage> {
                   ),
                 ),
                 Text(
-                  menu.price.toStringAsFixed(0),
+                  menu.precio.toStringAsFixed(0),
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 18,
@@ -230,7 +230,7 @@ class _MyHistorialPage extends State<MyHistorialPage> {
     );
   }
 
-  Widget ButtonEnableOrNot() {
+  Widget BotonActivoOInactivo() {
     return Container(
       margin: EdgeInsets.fromLTRB(95, 0, 0, 30),
       height: 25,
@@ -259,15 +259,15 @@ class _MyHistorialPage extends State<MyHistorialPage> {
           label: 'Historial',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: Icon(Icons.camera_alt),
           label: 'Scanner',
         ),
       ],
       selectedItemColor: Color(0xff00376e),
-      currentIndex: _selectedIndex,
+      currentIndex: indexNavigation,
       onTap: (index) {
         setState(() {
-          _selectedIndex = index;
+          indexNavigation = index;
           if (index == 0) {
             Navigator.pushNamed(context, '/');
           } else if (index == 1) {
